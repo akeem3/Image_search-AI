@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+    />
+    <style>
+      /* Add some styling to the container */
+      .container {
+        text-align: center;
+        margin-top: 50px;
+        font-family: sans-serif;
+      }
+      /* Add some styling to the form */
+      form {
+        margin-bottom: 50px;
+      }
+      /* Add some styling to the query image */
+      img[src*="query"] {
+        border: solid 2px #333;
+        border-radius: 5px;
+        margin-bottom: 20px;
+      }
+      /* Add some styling to the result images */
+      figure {
+        display: inline-block;
+        margin-right: 20px;
+        margin-bottom: 20px;
+        text-align: center;
+      }
+      /* Add some styling to the captions */
+      figcaption {
+        font-size: 12px;
+        color: #999;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Simple image search engine</h1>
+      <form method="POST" enctype="multipart/form-data">
+        <input type="file" name="query_img" /><br />
+        <input type="submit" />
+      </form>
+      <h2>Query:</h2>
+      {% if query_path %}
+      <img src="{{ query_path }}" width="300px" class="img-responsive" />
+      {% endif %}
+      <h2>Results:</h2>
+      {% for score in scores %}
+      <figure>
+        <img src="{{ score[1] }}" height="200px" class="img-responsive" />
+        <figcaption>{{ score[0] }}</figcaption>
+      </figure>
+      {% endfor %}
+    </div>
+  </body>
+</html>
